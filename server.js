@@ -9,6 +9,8 @@ import typeDefs from './typeDefs.js';
 import resolvers from './resolvers.js';
 import jwt from 'jsonwebtoken';
 
+const port = process.env.PORT || 4000
+
 // create express and HTTP server
 const app = express();
 const httpServer = createServer(app);
@@ -58,7 +60,7 @@ const apolloServer = new ApolloServer({
 
 await apolloServer.start();
 apolloServer.applyMiddleware({ app });
-httpServer.listen(4000, () =>{
+httpServer.listen(port, () =>{
     console.log(`Server ready at http://localhost:4000${apolloServer.graphqlPath}`);
     console.log(`Subscription ready at ws://localhost:4000${apolloServer.graphqlPath}`);
 });
