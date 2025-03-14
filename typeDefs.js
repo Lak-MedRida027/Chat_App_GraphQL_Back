@@ -1,48 +1,51 @@
-
 const typeDefs = `
-    type Query{
-        users:[User]
-        messagesOfUser(receiverId:Int!):[Message]
+    type Query {
+        users: [User]
+        messagesOfUser(receiverId: Int!): [Message]
     }
 
-    input UserInput{
+    input UserInput {
         name: String!
         email: String!
         age: Int!
         password: String!
     }
 
-    input UserLogInInput{
+    input UserLogInInput {
         email: String!
         password: String!
     }
 
-    type Token{
+    type Token {
         token: String!
     }
 
-    type Mutation{
+    type Mutation {
         signUpUser(userNew: UserInput!): User
         logInUser(userData: UserLogInInput!): Token
-        createMessage(receiverId:Int!, text:String!): Message
+        createMessage(receiverId: Int!, text: String!): Message
+    }
+
+    type Subscription{
+        messageAdded: Message
     }
 
     scalar Date
 
-    type User{
+    type User {
         id: ID!
         name: String!
         email: String!
         age: Int!
     }
 
-    type Message{
-        id: ID!     
+    type Message {
+        id: ID!
         text: String!
-        senderId: Int!     
-        receiverId: Int!   
+        senderId: Int!
+        receiverId: Int!
         createdAt: Date!
     }
 `;
 
-module.exports = typeDefs;
+export default typeDefs;
